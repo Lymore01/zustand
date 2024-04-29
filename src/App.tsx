@@ -1,5 +1,6 @@
 import './App.css'
-import TestStore from './TestStore'
+import TestStore from './Components/TestStore'
+import ViewStore from './Components/ViewStore'
 
 function App() {
   
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
       <TestStore />
+      <ViewStore />
     </>
   )
 }

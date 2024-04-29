@@ -1,21 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from "zustand";
 
-type createStore = {
-  count: number;
+type searchStore = {
+  input: string;
 };
 
-type Actions = {
-  increment: () => void;
-  decrement: () => void;
+type cartItems = {
+  cartItem: any;
 };
 
-export const useStore = create<createStore & Actions>((set) => ({
-  count: 0,
-  increment: () => {
-    set((state) => ({ count: state.count + 1 }));
-  },
-  decrement: () => {
-    set((state) => ({ count: state.count - 1 }));
-  },
+export const useSearch = create<searchStore>(() => ({
+  input: "",
+}));
+
+export const useCart = create<cartItems>(() => ({
+  cartItem: [],
 }));
