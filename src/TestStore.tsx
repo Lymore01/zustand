@@ -1,15 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import useStore from "./store/useStore";
+import { useStore } from "./store/useStore";
+import { useEffect } from "react";
 
+const setCount = () => {
+  useStore.setState({count: 2});
+  };
 
 const TestStore = () => {
-const { count, increment, decrement } = useStore();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const count = useStore((state: any)=>state.count)
+  const {increment, decrement } = useStore();
+
+  useEffect(() => {
+    setCount();
+  }, []);
+
   return (
     <>
       <div>
-        <h2>Count: {count}</h2>
-        <button onClick={increment}>Increment</button>
-        <button onClick={decrement}>Decrement</button>
+        {count}
+        <div>
+          <button onClick={increment}>+</button>
+          <button onClick={decrement}>-</button>
+        </div>
       </div>
     </>
   );
