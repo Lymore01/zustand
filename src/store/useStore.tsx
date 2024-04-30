@@ -10,6 +10,11 @@ type cartItems = {
   cartItem: any;
 };
 
+type storeItems = {
+  themeMode: string,
+  toggleTheme: ()=>void
+}
+
 export const useSearch = create<searchStore>(() => ({
   input: "",
 }));
@@ -17,3 +22,15 @@ export const useSearch = create<searchStore>(() => ({
 export const useCart = create<cartItems>(() => ({
   cartItem: [],
 }));
+
+
+// theme state
+
+export const useThemeStore = create<storeItems>((set)=>(
+  {
+    themeMode: 'light',
+    toggleTheme: () => set((state)=>({
+      themeMode: state.themeMode === 'light' ? 'dark' : 'light'
+    }))
+  }
+))
