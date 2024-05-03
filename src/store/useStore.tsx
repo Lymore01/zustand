@@ -28,7 +28,7 @@ export const useCart = create<cartItems>(() => ({
 
 export const useThemeStore = create<storeItems>((set)=>(
   {
-    themeMode: 'light',
+    themeMode: 'dark',
     toggleTheme: () => set((state)=>({
       themeMode: state.themeMode === 'light' ? 'dark' : 'light'
     }))
