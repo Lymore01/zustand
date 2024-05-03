@@ -7,8 +7,9 @@
     font-family: "Cinzel", serif;
     font-family: "Poppins", sans-serif;
     font-family: "Roboto Serif", serif;
+    font-family: "Nunito Sans", sans-serif;
     font-family: "Montserrat", sans-serif;
-    background-color: #f5f5f5;
+    background-color: white;
   }
 }
 ::-webkit-scrollbar {
