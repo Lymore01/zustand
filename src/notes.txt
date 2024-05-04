@@ -1,0 +1,13 @@
+const isSmallDevice = useMediaQuery("(max-width: 768px)");
+  const hoverClasses = isSmallDevice ? "" : "hover:place-content-center hover:scale-x-150 hover:origin-left hover:ease-linear hover:duration-700 hover:animate-spring hover:w-[250%]";
+
+// Use the `whileHover` animation only if it's not a small device
+const hoverAnimation = !isSmallDevice
+  ? {
+      scaleX: 1.5, // Your hover animation properties
+      transition: {
+        ease: "easeInOut",
+        duration: 0.7,
+      },
+    }
+  : {};

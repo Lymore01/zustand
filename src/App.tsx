@@ -1,22 +1,30 @@
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { motion, useAnimation, useInView } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import { CiLocationOn } from "react-icons/ci";
 
 function App() {
-  /* const ref = useRef(null);
-  const inView = useInView(ref, { once: false }); */
-
+  // const [currentMenu, setCurrentMenu] = useState<string>("1");
+  const ref1 = useRef(null);
+  const inView1 = useInView(ref1, { once: false });
   const [isScrolled, setIsScrolled] = useState(false);
   const controls = useAnimation();
 
+ 
+
+  useEffect(() => {
+    console.log(inView1);
+  }, [inView1]);
+
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY ;
-      setIsScrolled(scrollY > 0); // Check if scrolled beyond the top
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 0);
       if (scrollY > 0) {
-        controls.start({ backgroundColor: "white" });
+        controls.start({ backgroundColor: "white", color: "black" });
       } else {
-        controls.start({ backgroundColor: "transparent" });
+        controls.start({ backgroundColor: "transparent", color: "white" });
       }
     };
 
@@ -57,7 +65,7 @@ function App() {
         <motion.div
           initial={{ backgroundColor: "transparent" }}
           animate={controls}
-          className={`z-20 sticky top-0 w-full h-auto p-3 pr-8 pl-8 flex flex-row justify-between ${
+          className={`z-40 fixed top-0 w-full h-auto p-4 pr-8 pl-8 flex flex-row justify-between ${
             isScrolled ? "text-[black]" : "text-[white]"
           } text-white font-extrabold items-center`}
         >
@@ -66,14 +74,15 @@ function App() {
               <div className="w-10 h-1 rotate-0 transition-all bg-current mb-2"></div>
               <div className="w-10 h-1 rotate-0 transition-all bg-current "></div>
             </button>
-            <span className="flex flex-row items-center gap-[20px] lg:gap-[8px] text-[18px] font-semibold">
+            <span className="sm:hidden flex-row items-center gap-[20px] lg:gap-[8px] text-[18px] font-semibold  md:hidden lg:flex">
               EN{" "}
               <span>
                 <IoIosArrowDown className="h-[24px] w-[24px] lg:w-[16px]" />
               </span>
             </span>
           </div>
-          <div className="translate-x-[50%]">
+          {/* logo */}
+          <div className="">
             <svg
               className="fill-current"
               width="129"
@@ -87,7 +96,7 @@ function App() {
           </div>
 
           <div className="uppercase flex flex-row gap-14 items-center font-semibold text-[15px]">
-            <span className="tracking-widest">Sign In</span>
+            <span className="tracking-widest hidden lg:flex">Sign In</span>
             <div
               className={`cursor-pointer p-3 pr-4 pl-4 w-auto items-center ${
                 isScrolled == true
@@ -129,7 +138,297 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="w-full h-[100vh]"></div>
+      {/* content */}
+      {/* content 1 */}
+      <div className="w-full h-full p-16 flex place-content-center justify-center items-center bg-[white] flex-col gap-[20px] mb-[30px]">
+        <div className="w-full h-auto p-8 pb-16 flex place-content-center flex-col gap-[10px] text-center text-[#02102A]">
+          <h2 className="text-[32px] font-semibold lg:text-[60px] md:text-[34px]">Destinations</h2>
+          <p className="text-[14px] font-normal lg:text-[18px] md:text-[16px]">
+            Explore the world with Kempinski. Where will you go?
+          </p>
+        </div>
+        <div className="items-center justify-center flex-row flex h-[70vh] overflow-x-scroll gap-[20px] p-4">
+        <a className="h-full relative flex w-[380px] group">
+  <motion.img
+    id="image"
+    src="https://storage.kempinski.com/cdn-cgi/image/w=450,h=600,f=auto,g=auto,fit=cover/ki-cms-prod/images/2/2/9/1/2301922-1-eng-GB/f42730ebc1f9-Destinations_Dubai-Downtown.jpg"
+    className="object-cover w-full h-full absolute top-0 z-10"
+  ></motion.img>
+  <motion.div
+    id="div"
+    className="w-full h-full bg-[rgba(0,0,0,0.4)] grid place-content-center text-white text-[24px] font-bold absolute z-20 top-0 bg-clip-content group-hover:hidden"
+  >
+    <img
+      src="https://www.kempinski.com/en/content/download/18193/395128?version=4&amp;inline=1"
+      alt="logo"
+      className="w-full h-full object-cover"
+    ></img>
+  </motion.div>
+  <motion.div
+    id="div"
+    className="gap-[20px] w-full h-full bg-[rgba(0,0,0,0.7)]  justify-center items-center text-white text-[24px] font-bold absolute z-30 top-0 flex-col hidden group-hover:flex"
+  >
+    <h4 className="font-light">Kempinski in Dubai</h4>
+    <div className="w-auto p-2 flex flex-row gap-[10px] text-[14px] font-light items-center">
+      <span><CiLocationOn className="w-[25px] h-[25px] fill-[#b5A191]"/></span>
+      <span className="font-[16px]">
+        Dubai, United Arabs Emirates
+      </span>
+    </div>
+    <div>
+      <p className="text-center font-light text-[14px] w-[60%] mx-auto">Choose from four stylish accommodation options in this captivating city of contrasts.</p>
+    </div>
+    <div
+      className={`cursor-pointer p-3 pr-4 pl-4 h-[48px] items-center justify-center border border-[#b5A191] flex w-[200px] text-[12px]`}
+    >
+      <span className="font-bold tracking-widest">Discover more</span>
+    </div>
+  </motion.div>
+</a>
+
+
+          <a className="h-full relative flex w-[380px]">
+            <motion.img
+              id="image"
+              src="https://storage.kempinski.com/cdn-cgi/image/w=450,h=600,f=auto,g=auto,fit=cover/ki-cms-prod/images/0/6/8/8/278860-1-eng-GB/5c4772ce5c52-DestinationsIST-Kempinski-Ciragan-Istanbul-Bosphorus.jpg"
+              className="object-cover w-full h-full absolute top-0 z-10 "
+            ></motion.img>
+            <motion.div
+              id="div"
+              className="w-full h-full bg-[rgba(0,0,0,0.4)] grid place-content-center text-white text-[24px] font-bold absolute z-20 top-0"
+            >
+              <img
+                src="https://www.kempinski.com/en/content/download/21626/474891?version=3&inline=1"
+                alt="logo"
+                className="w-full h-full object-cover"
+              ></img>
+            </motion.div>
+          </a>
+          <a className="h-full relative flex w-[380px]">
+            <motion.img
+              id="image"
+              src="https://storage.kempinski.com/cdn-cgi/image/w=450,h=600,f=auto,g=auto,fit=cover/ki-cms-prod/images/1/8/8/8/278881-1-eng-GB/667504e429e1-DestinationsCUN1-Kempinski-Cancun-Beach.jpg"
+              className="object-cover w-full h-full absolute top-0 z-10 "
+            ></motion.img>
+            <motion.div
+              id="div"
+              className="w-full h-full bg-[rgba(0,0,0,0.4)] grid place-content-center text-white text-[24px] font-bold absolute z-20 top-0"
+            >
+              <img
+                src="https://www.kempinski.com/en/content/download/6742/105260?version=5&inline=1"
+                alt="logo"
+                className="w-full h-full object-cover"
+              ></img>
+            </motion.div>
+          </a>
+        </div>
+        <div>
+          <div
+            className={`cursor-pointer p-3 pr-4 pl-4 h-[48px] items-center
+               justify-center border border-[#b5A191] flex w-[310px]`}
+          >
+            <span className="font-bold tracking-widest">Discover more</span>
+          </div>
+        </div>
+      </div>
+      {/* content 2 */}
+      <div className="w-full h-full p-16 flex place-content-center justify-center items-center bg-white flex-col">
+        <motion.div
+          className={`w-[100%] flex-row flex h-[80vh] bg-clip-content relative ${
+            inView1 && "md:scale-100 ease-in-out duration-800"
+          }`}
+          whileInView={{
+            scale: 1.08,
+            transition: {
+              delay: 0.6,
+              ease: "easeInOut",
+            },
+          }}
+          id="div1"
+        >
+          {/* {currentMenu == '1' ? (
+              <>
+              <img
+            src="https://storage.kempinski.com/cdn-cgi/image/w=1920,f=auto,g=auto,fit=scale-down/ki-cms-prod/images/4/8/8/8/278884-1-eng-GB/167e0479d8b4-Experiences-Culinary-SZG1-Kempinski-Berchtesgaden-PUR-restaurant-prawn.jpg"
+            className="object-cover w-full h-full absolute top-0 z-10 "
+          ></img>
+          <div className="w-full h-[100%] bg-[rgba(0,0,0,0.4)]  text-white text-[24px] font-bold absolute z-20 top-0 flex flex-col justify-between">
+            <div className="w-full h-[80%] flex items-center justify-center flex-col gap-[10px] font-light">
+              <h2 className="text-[46px]" >Flavours Of The World</h2>
+              <p className="text-[15px] text-center" >
+                Get inspiration for your next trip by exploring our destinations
+                <br></br> through the creativity of our talented chefs.
+              </p>
+              <div className="mt-[30px]">
+                <div
+                  className={`cursor-pointer p-3 pr-4 pl-4 h-[48px] items-center
+               justify-center border border-[#b5A191] flex w-[208px]`}
+                >
+                  <span className="font-bold tracking-widest text-[14px]">
+                    Discover more
+                  </span>
+                </div>
+              </div>
+              </div>
+            </div>
+              </>
+          ): currentMenu == '2' ? (
+            
+          ):currentMenu == '3' ? (
+
+          ) : currentMenu == '4' ? (
+
+          ) : currentMenu == '5' ? (
+
+          ) : currentMenu == '6' ? (
+
+          ) : (<></>)} */}
+          <img
+            src="https://storage.kempinski.com/cdn-cgi/image/w=1920,f=auto,g=auto,fit=scale-down/ki-cms-prod/images/0/5/4/0/270450-1-eng-GB/03c1e408328d-KIBXO1_Kempinski-The-Spa-Hammock-Chair_High-Res_19175.jpg"
+            className="object-cover w-full h-full absolute top-0 z-10 "
+            id="image1"
+          ></img>
+          <div className="w-full h-[100%] bg-[rgba(0,0,0,0.4)]  text-white text-[24px] font-bold absolute z-20 top-0 flex flex-col justify-between">
+            <div className="w-full h-[80%] flex items-center justify-center flex-col gap-[10px] font-light">
+              <h2 className="text-[46px]">Blissful Indulgence</h2>
+              <p className="text-[15px] text-center">
+                Get inspiration for your next trip by exploring our destinations
+                <br></br> through the creativity of our talented chefs.
+              </p>
+              <div className="mt-[30px]">
+                <div
+                  className={`cursor-pointer p-3 pr-4 pl-4 h-[48px] items-center
+               justify-center border border-[#b5A191] flex w-[208px]`}
+                >
+                  <span className="font-bold tracking-widest text-[14px]">
+                    Discover more
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              className="h-[20%] place-content-center flex flex-row gap-[30px] p-4 justify-center items-center list-none font-light text-[14px] capitalize "
+              ref={ref1}
+            >
+              <motion.li
+                onHoverStart={() => {
+                  setCurrentMenu("1");
+                }}
+              >
+                suites
+              </motion.li>
+              <motion.li
+                onHoverStart={() => {
+                  setCurrentMenu("2");
+                }}
+              >
+                culinary
+              </motion.li>
+              <motion.li
+                onHoverStart={() => {
+                  setCurrentMenu("3");
+                }}
+              >
+                special occasions
+              </motion.li>
+              <motion.li
+                onHoverStart={() => {
+                  setCurrentMenu("4");
+                }}
+              >
+                sports and adventure
+              </motion.li>
+              <motion.li
+                onHoverStart={() => {
+                  setCurrentMenu("5");
+                }}
+              >
+                for your wellbeing
+              </motion.li>
+              <motion.li
+                onHoverStart={() => {
+                  setCurrentMenu("1");
+                }}
+              >
+                family
+              </motion.li>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* content 2 */}
+
+      <div className="w-full h-full p-16 flex place-content-center justify-center items-center bg-[whitesmoke] flex-col">
+        <div className="w-full h-auto p-8 pb-16 flex place-content-center flex-col gap-[10px] text-center text-[#02102A]">
+          <h2 className="text-[32px] md:text-[34px] lg:text-[60px] font-semibold">Kempinski Loyalty</h2>
+          <p className="lg:text-[18px] font-normal text-[14px] md:text-[16px]">
+            Join our global loyalty programme for more rewards, greater access,
+            and instant recognition
+          </p>
+        </div>
+        <div className="w-[100%] lg:flex-row flex-col md:flex-col flex sm:h-[600px] md:h-[666px] lg:h-[70vh]  bg-clip-content ">
+          <motion.a
+            className="w-full h-full relative flex hover:place-content-center  cursor-pointer hover:scale-x-150 hover:origin-left hover:ease-linear hover:duration-700 hover:animate-spring hover:w-[250%]"
+            id="parent"
+            whileHover={{
+              scaleX: 1,
+              transition: {
+                ease: "easeInOut",
+              },
+            }}
+          >
+            <motion.img
+              id="image"
+              src="https://storage.kempinski.com/cdn-cgi/image/w=960,f=auto,g=auto,fit=scale-down/ki-cms-prod/images/2/2/2/5/255222-1-eng-GB/9e1994000a70-KISZG1_PUR_Sommer24_High-Res_24509_rs.jpg"
+              className="object-cover w-full h-full absolute top-0 z-10 transition-transform duration-300 ease-in-out"
+            ></motion.img>
+            <motion.div
+              id="div"
+              className="w-full h-full bg-[rgba(0,0,0,0.4)] grid place-content-center text-white text-[24px] font-bold absolute z-20 top-0 hover:place-content-center transition-transform duration-700 ease-in-out  font-sa"
+            >
+              <span>Instant Benefits</span>
+            </motion.div>
+          </motion.a>
+          <motion.a
+            className="w-full h-full relative cursor-pointer hover:scale-x-150 hover:origin-center hover:ease-linear hover:duration-500 hover:animate-spring hover:w-[250%]"
+            whileHover={{
+              scaleX: 1,
+              transition: {
+                ease: "easeInOut",
+              },
+            }}
+          >
+            <img
+              src="https://storage.kempinski.com/cdn-cgi/image/w=960,f=auto,g=auto,fit=scale-down/ki-cms-prod/images/5/2/2/5/255225-1-eng-GB/ab4b8c779670-Kempinski-Cuba-461-CBP-ARTO-dec-21_High-Res_21604_rs.jpg"
+              className="object-cover w-full h-full absolute top-0 z-10"
+            ></img>
+            <div className="w-full h-full bg-[rgba(0,0,0,0.4)] grid place-content-center text-white text-[24px] font-bold absolute z-20 font-sa">
+              <span>DISCOVERY Dollars</span>
+            </div>
+          </motion.a>
+
+          <motion.a
+            className="w-full h-full relative cursor-pointer hover:scale-x-150 hover:origin-right hover:ease-linear hover:duration-500 hover:animate-spring hover:w-[250%]"
+            whileHover={{
+              scaleX: 1,
+              transition: {
+                ease: "easeInOut",
+              },
+            }}
+          >
+            <img
+              src="https://storage.kempinski.com/cdn-cgi/image/w=960,f=auto,g=auto,fit=scale-down/ki-cms-prod/images/0/9/8/8/278890-1-eng-GB/f40bb1f4b323-Loyalty-DPS1-Kempinski-Bali-Experience-chakra-awakening-02.jpg"
+              className="object-cover w-full h-full absolute top-0 z-10 "
+            ></img>
+            <motion.div className="w-full h-full bg-[rgba(0,0,0,0.4)] grid place-content-center text-white text-[24px] font-bold absolute z-20 top-0 hover:place-content-center hover:flex hover:items-center hover:justify-center">
+              <span className="text-center relative items-center">
+                Live Local
+              </span>
+            </motion.div>
+          </motion.a>
+        </div>
+      </div>
     </>
   );
 }
